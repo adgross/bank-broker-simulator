@@ -1,0 +1,32 @@
+server:
+  port: 7979
+  shutdown: graceful
+
+spring:
+  profiles:
+    active: "local"
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  cloud.stream:
+    kafka:
+      binder:
+        autoCreateTopics: true
+        brokers: kafka:9092
+        configuration:
+          value:
+            deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+            serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+          key:
+            deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+            serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+    bindings:
+      stockquote-updated-output:
+        destination: streaming.bankbroker.stockquote.updated
+        contentType: application/*+avro
+        producer:
+          use-native-encoding: true
+  kafka:
+    properties:
+      schema:
+        registry:
+          url: http://schema-registry:8081

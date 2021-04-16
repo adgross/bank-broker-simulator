@@ -1,0 +1,11 @@
+{
+    "namespace": "io.github.adgross.stocksim.event",
+    "type": "record",
+    "name": "StockQuoteUpdatedEvent",
+    "fields": [
+        {
+            "name": "value",
+            "type": ["long"]
+        }
+    ]
+}
