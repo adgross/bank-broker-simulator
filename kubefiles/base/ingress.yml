@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bankbroker-ingress
+  namespace: bankbroker
+spec:
+  rules:
+    - host: bankbroker.local
+      http:
+        paths:
+          - path: /whoami/
+            pathType: Prefix
+            backend:
+              service:
+                name: banksim
+                port:
+                  number: 8080
+          - path: /clients/
+            pathType: Prefix
+            backend:
+              service:
+                name: banksim
+                port:
+                  number: 8080

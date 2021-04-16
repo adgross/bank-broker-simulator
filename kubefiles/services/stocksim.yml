@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stocksim
+  namespace: bankbroker
+spec:
+  selector:
+    matchLabels:
+      app: stocksim
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: stocksim
+    spec:
+      containers:
+        - name: stocksim
+          image: stock-exchange-simulator:0.1.0
+          imagePullPolicy: Never

@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: schema-registry
+  namespace: bankbroker
+  labels:
+    app: schema-registry
+spec:
+  selector:
+    app: schema-registry
+  ports:
+    - port: 8081
+      targetPort: 8081
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: schema-registry
+  namespace: bankbroker
+spec:
+  selector:
+    matchLabels:
+      app: schema-registry
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: schema-registry
+    spec:
+      containers:
+        - name: schema-registry
+          image: confluentinc/cp-schema-registry:6.1.1
+          env:
+            - name: SCHEMA_REGISTRY_HOST_NAME
+              value: schema-registry
+            - name: SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL
+              value: zookeeper:2181
+          ports:
+            - containerPort: 8081

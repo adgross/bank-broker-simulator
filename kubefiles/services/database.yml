@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: database
+  namespace: bankbroker
+  labels:
+    app: pgsql
+    tier: backend
+    role: database
+spec:
+  selector:
+    app: pgsql
+    tier: backend
+    role: database
+  ports:
+    - port: 5432
+      targetPort: 5432
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgsql
+  namespace: bankbroker
+spec:
+  selector:
+    matchLabels:
+      app: pgsql
+      tier: backend
+      role: database
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pgsql
+        tier: backend
+        role: database
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:13.2
+          env:
+            - name: POSTGRES_PASSWORD
+              value: whut
+          ports:
+            - containerPort: 5432

@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: banksim
+  namespace: bankbroker
+  labels:
+    app: banksim
+    tier: backend
+    role: api
+spec:
+  selector:
+    app: banksim
+    tier: backend
+    role: api
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: banksim
+  namespace: bankbroker
+spec:
+  selector:
+    matchLabels:
+      app: banksim
+      tier: backend
+      role: api
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: banksim
+        tier: backend
+        role: api
+    spec:
+      containers:
+        - name: banksim
+          image: bank-broker:0.1.0
+          imagePullPolicy: Never
+          env:
+            - name: DATABASE_SERVER_NAME
+              value: database
+            - name: DATABASE_USER_PASSWORD
+              value: whut
+            - name: DATABASE_USER_NAME
+              value: postgres
+          ports:
+            - containerPort: 8080
+#          livenessProbe:
+#            httpGet:
+#              path: /actuator/health/liveness
+#              port: 8080
+#            initialDelaySeconds: 30
+#          readinessProbe:
+#            httpGet:
+#              path: /actuator/health/readiness
+#              port: 8080
+#            initialDelaySeconds: 30
