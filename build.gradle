@@ -1,0 +1,6 @@
+group = 'io.github.adgross'
+version = '0.1.0'
+
+wrapper {
+	gradleVersion = '6.8.3'
+}
