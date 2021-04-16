@@ -1,2 +1,15 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        jcenter()
+        maven {
+            name "JCenter Gradle Plugins"
+            url "https://dl.bintray.com/gradle/gradle-plugins"
+        }
+    }
+}
 rootProject.name = 'bank-broker-simulator'
 include 'bank-broker'
+include 'frontend'
+include 'stock-exchange-simulator'
+include 'balance'
