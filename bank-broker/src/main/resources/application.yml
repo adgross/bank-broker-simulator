@@ -1,0 +1,43 @@
+server:
+  port: 8080
+  shutdown: graceful
+
+spring:
+  profiles:
+    active: "local"
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  datasource:
+    url: jdbc:postgresql://${DATABASE_SERVER_NAME:localhost}:${DATABASE_SERVER_PORT:5432}/${DATABASE_NAME:postgres}
+    username: ${DATABASE_USER_NAME:postgres}
+    password: ${DATABASE_USER_PASSWORD:postgres}
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  cloud.stream:
+    kafka:
+      binder:
+        autoCreateTopics: true
+        brokers: kafka:9092
+        configuration:
+          value:
+            deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+            serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+          key:
+            deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+            serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+    bindings:
+      stockquote-updated-input:
+        destination: streaming.bankbroker.stockquote.updated
+        contentType: application/*+avro
+        group: ${spring.application.name}
+        consumer:
+          use-native-decoding: true
+  kafka:
+    properties:
+      schema:
+        registry:
+          url: http://schema-registry:8081
+  application:
+    name: bank-broker
