@@ -1,19 +1,51 @@
 plugins {
     id 'java'
+    id "io.quarkus" version "1.13.2.Final"
+    id 'checkstyle'
 }
 
 group 'io.github.adgross'
-version '0.0.1'
+version '0.1.0'
+
+sourceCompatibility = '11'
+targetCompatibility = '11'
+
+compileJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    // quarkus
+    implementation enforcedPlatform("io.quarkus:quarkus-universe-bom:1.13.2.Final")
+    implementation 'io.quarkus:quarkus-resteasy-jackson'
+    implementation 'io.quarkus:quarkus-resteasy'
+    implementation 'io.quarkus:quarkus-arc'
+    implementation 'io.quarkus:quarkus-vertx'
+    implementation 'io.quarkus:quarkus-smallrye-health'
+    implementation 'io.quarkus:quarkus-smallrye-reactive-messaging-kafka'
+    implementation 'io.quarkus:quarkus-kafka-streams'
+    testImplementation 'io.quarkus:quarkus-junit5'
+    testImplementation 'io.rest-assured:rest-assured'
 }
 
-test {
-    useJUnitPlatform()
+tasks.withType(Checkstyle) {
+    reports {
+        xml.enabled false
+        html.enabled false
+    }
+}
+
+checkstyle {
+    configFile rootProject.file('config/checkstyle/checkstyle.xml')
+    toolVersion = "8.41"
 }
