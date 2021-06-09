@@ -40,8 +40,8 @@ dependencies {
 
 tasks.withType(Checkstyle) {
     reports {
-        xml.enabled false
-        html.enabled false
+        xml.required = false
+        html.required = false
     }
 }
 
