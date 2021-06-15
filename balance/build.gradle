@@ -47,5 +47,5 @@ tasks.withType(Checkstyle) {
 
 checkstyle {
     configFile rootProject.file('config/checkstyle/checkstyle.xml')
-    toolVersion = "8.41"
+    toolVersion = "8.43"
 }
