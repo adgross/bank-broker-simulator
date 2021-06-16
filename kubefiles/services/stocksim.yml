@@ -15,5 +15,5 @@ spec:
     spec:
       containers:
         - name: stocksim
-          image: stock-exchange-simulator:0.1.0
+          image: stock-exchange-simulator:0.2.0
           imagePullPolicy: Never

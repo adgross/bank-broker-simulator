@@ -39,7 +39,7 @@ spec:
     spec:
       containers:
         - name: banksim
-          image: bank-broker:0.1.0
+          image: bank-broker:0.2.0
           imagePullPolicy: Never
           env:
             - name: DATABASE_SERVER_NAME
