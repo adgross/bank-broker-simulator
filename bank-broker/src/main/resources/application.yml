@@ -16,28 +16,26 @@ spring:
     hibernate:
       ddl-auto: update
   cloud.stream:
+    function:
+      definition: stockQuoteListener
+    bindings:
+      stockQuoteListener-in-0:
+        destination: streaming.bankbroker.stockquote.updated
     kafka:
       binder:
-        autoCreateTopics: true
         brokers: kafka:9092
-        configuration:
-          value:
-            deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-            serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-          key:
-            deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-            serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-    bindings:
-      stockquote-updated-input:
-        destination: streaming.bankbroker.stockquote.updated
-        contentType: application/*+avro
-        group: ${spring.application.name}
-        consumer:
-          use-native-decoding: true
-  kafka:
-    properties:
-      schema:
-        registry:
-          url: http://schema-registry:8081
-  application:
-    name: bank-broker
+      bindings:
+        stockQuoteListener-in-0:
+          consumer:
+            configuration:
+              schema.registry.url: http://schema-registry:8081
+              value:
+                deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+                serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+              key:
+                deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+                serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      streams:
+        binder:
+          configuration:
+            schema.registry.url: http://schema-registry:8081
