@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
         - name: zookeeper
-          image: bitnami/zookeeper:3.7.0-debian-10-r22
+          image: bitnami/zookeeper:3.7.0-debian-10-r64
           env:
             - name: ALLOW_ANONYMOUS_LOGIN
               value: "yes"

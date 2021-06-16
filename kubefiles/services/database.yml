@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: postgres:13.2
+          image: postgres:13.3
           env:
             - name: POSTGRES_PASSWORD
               value: whut

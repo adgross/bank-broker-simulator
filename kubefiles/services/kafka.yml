@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
         - name: kafka
-          image: bitnami/kafka:2.8.0-debian-10-r0
+          image: bitnami/kafka:2.8.0-debian-10-r37
           env:
             - name: KAFKA_BROKER_ID
               value: "1"
