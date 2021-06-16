@@ -1,0 +1,21 @@
+plugins {
+    id "com.github.davidmc24.gradle.plugin.avro" version "1.2.0"
+    id 'java'
+}
+
+group 'io.github.adgross'
+version '0.1.0'
+sourceCompatibility = '11'
+targetCompatibility = '11'
+
+dependencies {
+    implementation 'org.apache.avro:avro:1.10.2'
+}
+
+avro {
+    fieldVisibility = "PRIVATE"
+}
+
+generateAvroJava {
+    source "src/main/resources/avro"
+}
