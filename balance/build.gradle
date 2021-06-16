@@ -19,11 +19,6 @@ compileTestJava {
     options.encoding = 'UTF-8'
 }
 
-repositories {
-    mavenLocal()
-    mavenCentral()
-}
-
 dependencies {
     // quarkus
     implementation enforcedPlatform("io.quarkus:quarkus-universe-bom:1.13.6.Final")

@@ -17,13 +17,6 @@ configurations {
     }
 }
 
-repositories {
-    mavenCentral()
-    maven {
-        url 'http://packages.confluent.io/maven/'
-    }
-}
-
 ext {
     set('springCloudVersion', "2020.0.3")
 }
