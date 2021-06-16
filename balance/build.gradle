@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id "io.quarkus" version "1.13.2.Final"
+    id "io.quarkus" version "1.13.6.Final"
     id 'checkstyle'
 }
 
@@ -26,7 +26,7 @@ repositories {
 
 dependencies {
     // quarkus
-    implementation enforcedPlatform("io.quarkus:quarkus-universe-bom:1.13.2.Final")
+    implementation enforcedPlatform("io.quarkus:quarkus-universe-bom:1.13.6.Final")
     implementation 'io.quarkus:quarkus-resteasy-jackson'
     implementation 'io.quarkus:quarkus-resteasy'
     implementation 'io.quarkus:quarkus-arc'
