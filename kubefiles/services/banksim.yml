@@ -48,6 +48,10 @@ spec:
               value: whut
             - name: DATABASE_USER_NAME
               value: postgres
+            - name: KUBE_POD
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
           ports:
             - containerPort: 8080
 #          livenessProbe:

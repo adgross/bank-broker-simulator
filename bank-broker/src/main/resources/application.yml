@@ -3,6 +3,7 @@ server:
   shutdown: graceful
 
 spring:
+  application.name: ${KUBE_POD:banksim}
   profiles:
     active: "local"
   lifecycle:
