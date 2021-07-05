@@ -5,8 +5,8 @@ pluginManagement {
     }
 }
 rootProject.name = 'bank-broker-simulator'
-include 'bank-broker'
+include 'banksim'
 include 'frontend'
-include 'stock-exchange-simulator'
+include 'stocksim'
 include 'balance'
 include 'avro'
